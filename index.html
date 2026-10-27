@@ -1,0 +1,130 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>🎃 Secret Halloween Party!</title>
+<style>
+:root{color-scheme:dark;--bg:#1b1033;--cd:#2f1d5c;--or:#ff8a1f;--pu:#a66bff;--tx:#fff6e8;--ok:#3ecf6a;--ng:#ff5c7a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
+html,body{margin:0;background:radial-gradient(circle at 50% 0,#3b1f78,var(--bg) 70%) fixed;color:var(--tx);font-family:"Hiragino Maru Gothic ProN","Arial Rounded MT Bold",system-ui,sans-serif;touch-action:manipulation;min-height:100%}
+#top{display:flex;justify-content:space-between;align-items:center;padding:10px 18px;font-size:26px}
+#top button{font-size:28px;background:var(--cd);border:0;border-radius:16px;padding:6px 16px;color:var(--tx)}
+#app{max-width:900px;margin:0 auto;padding:0 16px 30px;text-align:center}
+h1{font-size:clamp(28px,6vw,48px);margin:6px 0;color:var(--or)}h2{margin:6px 0;color:var(--or)}p{margin:6px 0;opacity:.9}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-top:16px}
+.tile{background:var(--cd);border:3px solid var(--pu);border-radius:24px;padding:16px 8px;color:var(--tx);font-size:20px;display:flex;flex-direction:column;gap:4px;position:relative}
+.tile span{font-size:54px}.tile small,.opt small,.wc small,.pc small{font-size:13px;opacity:.8;display:block}
+.tile.d{border-color:var(--ok)}.tile.d::after{content:"✅";position:absolute;top:6px;right:10px}
+.btn{font-size:22px;background:var(--or);color:#2a1200;border:0;border-radius:20px;padding:12px 28px;margin:10px 6px;font-weight:700}
+.big{font-size:clamp(60px,14vw,110px);margin:8px 0}
+.snd{font-size:20px;background:var(--pu);color:#fff;border:0;border-radius:18px;padding:8px 20px}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:14px 0}
+.opt{font-size:26px;background:var(--cd);border:3px solid var(--pu);border-radius:20px;padding:16px 8px;color:var(--tx)}
+.opts.e .opt{font-size:64px}
+.ok{background:var(--ok)!important;border-color:var(--ok)!important;color:#05250f}.ng{animation:sk .35s;border-color:var(--ng)!important;opacity:.5}
+.grid4,.grid3{display:grid;gap:10px;margin:12px auto}.grid4{grid-template-columns:repeat(4,1fr)}.grid3{grid-template-columns:repeat(3,1fr);max-width:520px}
+.cd{aspect-ratio:1;font-size:clamp(20px,5vw,40px);background:var(--cd);border:3px solid var(--pu);border-radius:20px;color:var(--tx);padding:2px}
+.grid3 .cd{font-size:clamp(40px,10vw,72px)}.cd.up{background:#4b2f8c}
+.hole{animation:pop .5s backwards}
+.tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:8px}.tab{font-size:18px;background:var(--cd);color:var(--tx);border:2px solid var(--pu);border-radius:16px;padding:8px 14px}.tab.on{background:var(--pu)}
+.wc,.pc{background:var(--cd);border:3px solid var(--pu);border-radius:20px;color:var(--tx);padding:10px 4px;font-size:22px}.wc span{font-size:52px;display:block}
+.ph{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin:12px 0}.pc{font-size:24px;padding:18px}
+.slots{font-size:44px;letter-spacing:6px;margin:8px;min-height:60px;color:var(--or)}
+#bx{position:relative;height:58vh;overflow:hidden;background:#ffffff0d;border-radius:20px;margin:8px 0}
+.fl{position:absolute;top:-70px;font-size:60px;background:none;border:0;animation:fall 3.6s linear forwards}
+.bg{position:fixed;inset:auto 0 0 0;font-size:34px;opacity:.25;pointer-events:none;display:flex;justify-content:space-around}
+.sn{font-size:26px;line-height:2.3;margin:6px 0}.tk{font-size:26px;background:none;border:0;color:var(--tx);padding:2px 6px;border-radius:10px;font-family:inherit}.tk.ok{background:var(--ok);color:#05250f}
+.chat{max-width:720px;margin:8px auto;text-align:left}.bb{background:var(--cd);border-radius:18px;padding:10px 14px;margin:8px 0;font-size:24px;max-width:88%}.bb.Y{margin-left:auto;background:#4b2f8c}.bb.me{outline:3px solid var(--or)}.bb small{display:block;font-size:14px;opacity:.8}.bw{aspect-ratio:auto;padding:20px 2px;font-size:clamp(15px,3vw,26px)}
+@keyframes fall{to{transform:translateY(62vh)}}@keyframes sk{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}@keyframes pop{from{transform:scale(0) rotate(-30deg)}}
+</style></head><body>
+<div id="top"><button id="hm">🏠</button><b id="st">⭐ 0</b></div><div id="app"></div><div class="bg"><span>🎃</span><span>👻</span><span>🦇</span><span>🎃</span><span>🕸️</span></div>
+<script>
+const W=[["pumpkin","🎃","かぼちゃ","It is orange and round."],["candy","🍬","キャンディ","It is sweet."],["bat","🦇","コウモリ","It flies at night."],["spider","🕷️","クモ","It has eight legs."],["moon","🌙","つき","It is in the night sky."],["cat","🐈‍⬛","くろねこ","It says meow."],["apple","🍎","りんご","It is red. You can eat it."],["web","🕸️","クモのす","A spider makes it."],
+["ghost","👻","おばけ","It is white. It says boo."],["witch","🧙‍♀️","まじょ","She flies on a broom."],["vampire","🧛","ドラキュラ","He has sharp teeth."],["skeleton","💀","ガイコツ","It has bones."],["monster","👹","かいぶつ","It is big and scary."],["zombie","🧟","ゾンビ","It walks slowly."],["wizard","🧙‍♂️","まほうつかい","He has a magic wand."],["dragon","🐉","ドラゴン","It breathes fire."],
+["costume","🎭","コスチューム","You wear it at a party."],["door","🚪","ドア","You knock on it."],["house","🏚️","おばけやしき","It is big, old and scary."],["cake","🎂","ケーキ","You eat it on your birthday."],["party","🎉","パーティー","We dance and play."],["music","🎵","おんがく","You listen to it."],["cookie","🍪","クッキー","It is round and sweet."],["balloon","🎈","ふうせん","It is full of air. Pop!"]];
+const G=["🎃 Halloween Things","👻 Spooky Friends","🏚️ At the Party"];
+const PH=[["Trick or treat!","トリックオアトリート！"],["Happy Halloween!","ハッピーハロウィン！"],["What are you?","なにになったの？"],["I am a witch.","わたしはまじょです"],["I like your costume!","そのコスチュームいいね！"],["Here you are.","はい、どうぞ"],["You are welcome.","どういたしまして"],["Do you like candy?","キャンディすき？"],["I see a big ghost!","おおきなおばけがみえる！"],["Let’s dance!","おどろう！"],["Are you hungry?","おなかすいた？"],["I am full.","おなかいっぱい"]];
+const RP=[["🚪","Trick or Treat!","トリックオアトリート",[
+["Y","Knock knock!","トントン！","Thank you!","Goodbye!"],["H","Who is it?","だれですか？"],
+["Y","Trick or treat!","トリックオアトリート！","Happy birthday!","See you!"],["H","Wow! A cool costume! What are you?","かっこいい！なにになったの？"],
+["Y","I am a vampire!","ドラキュラだよ！","I am fine, thank you.","It is a door."],["H","Happy Halloween! Here you are. Do you like candy?","ハッピーハロウィン！はい、どうぞ。キャンディすき？"],
+["Y","Yes, I do! Thank you!","うん、すき！ありがとう！","I am a cat.","Good morning!"],["H","You are welcome. Bye-bye!","どういたしまして。バイバイ！"],
+["Y","Happy Halloween! Bye-bye!","ハッピーハロウィン！バイバイ！","Trick or treat!","Who is it?"]]],
+["🎭","Costume Party","コスチュームパーティー",[
+["H","Hi! Happy Halloween!","やあ！ハッピーハロウィン！"],["Y","Hi! Happy Halloween!","やあ！ハッピーハロウィン！","Goodbye!","I am full."],
+["H","What is your name?","なまえは？"],["Y","My name is Yuki.","わたしのなまえはユキです","I like pizza.","Yes, please."],
+["H","I like your costume! What are you?","いいコスチューム！なにになったの？"],["Y","I am a zombie. Boo!","ゾンビだよ。ガオー！","I am eight years old.","I like cake."],
+["H","Cool! Let’s dance!","かっこいい！おどろう！"],["Y","Yes! Let’s dance!","うん！おどろう！","I am in the kitchen.","Thank you, goodbye."],
+["H","You are a good dancer!","じょうずだね！"],["Y","Thank you! You are a good dancer, too!","ありがとう！あなたもじょうずだね！","You are welcome!","What is your name?"]]],
+["🍰","Party Table","パーティーのテーブル",[
+["H","Welcome to the party! Are you hungry?","ようこそ！おなかすいた？"],["Y","Yes, I am! I want some cake.","うん！ケーキがほしい","I am a pumpkin.","Happy birthday!"],
+["H","Here you are. Would you like some juice?","はい、どうぞ。ジュースはいかが？"],["Y","Yes, please.","はい、おねがいします","Here you are.","You are welcome."],
+["H","Is the cake good?","ケーキはおいしい？"],["Y","Yes, it is delicious!","うん、とってもおいしい！","Yes, I do.","No, it is a door."],
+["H","Great! Do you want more?","よかった！もっとたべる？"],["Y","No, thank you. I am full.","ううん、おなかいっぱい","Yes, I am a ghost.","Trick or treat!"],
+["H","OK! Let’s play a game!","じゃあ、ゲームしよう！"],["Y","Yes! Let’s play!","うん！あそぼう！","No, bye-bye.","Knock knock!"]]]];
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],sh=a=>[...a].sort(()=>Math.random()-.5),A=$('#app'),on=(s,f)=>$$(s).forEach((e,j)=>e.onclick=()=>f(e,j));
+let S=0,D=new Set,RD=new Set,V=null;
+function vo(){const a=speechSynthesis.getVoices().filter(v=>/^en[-_]US/i.test(v.lang));for(const n of['samantha','ava','allison','susan','karen','aria','jenny','zira','google us']){V=a.find(v=>v.name.toLowerCase().includes(n));if(V)return}V=a[0]||null}
+if('speechSynthesis' in window){vo();speechSynthesis.onvoiceschanged=vo}
+function say(t){if(!('speechSynthesis' in window))return;speechSynthesis.cancel();setTimeout(()=>{const u=new SpeechSynthesisUtterance(t);u.lang='en-US';if(V)u.voice=V;u.rate=.85;u.pitch=1.15;speechSynthesis.speak(u)},60)}
+const add=n=>{S+=n;$('#st').textContent='⭐ '+S};
+const M=[["📖","Learn","きいてまねしよう",learn],["🃏","Memory Match","しんけいすいじゃく",match],["🎱","Bingo","ビンゴ",bingo],["📝","Quiz","クイズ",quiz],["🔨","Whack-a-Word","ヒントでもぐらたたき",whack],["🍬","Candy Rain","キャンディキャッチ",rain],["✨","Spell It","スペルをつくろう",spell],["🕵️","Spot the Words","ことばをさがせ",spot],["🤔","Who Am I?","だれでしょう？",who],["💬","Role Play","えいかいわ ×3",rpmenu]];
+const go=i=>M[i][3](i);
+function home(){A.innerHTML=`<h1>🎃 Secret Halloween Party!</h1><p>ひみつのハロウィンパーティー</p><p>24 words · ${M.length} games · タップしてスタート！</p><div class="grid">${M.map((m,i)=>`<button class="tile ${D.has(i)?'d':''}"><span>${m[0]}</span><b>${m[1]}</b><small>${m[2]}</small></button>`).join('')}</div>${D.size==M.length?'<div class=big>🏆🎉</div><h2>Happy Halloween! すごい！</h2>':''}`;on('.tile',(e,i)=>go(i))}
+$('#hm').onclick=()=>{try{speechSynthesis.cancel()}catch(e){}home()};
+function fin(i,sc,t){D.add(i);add(2);A.innerHTML=`<div class=big>🎉</div><h2>Great Job! よくできました！</h2><p style="font-size:28px">${t?sc+' / '+t:'⭐ '+sc} ⭐</p><button class=btn id=h>🏠 Home</button><button class=btn id=a>🔄 Again</button>`;$('#h').onclick=home;$('#a').onclick=()=>go(i);say('Great job!')}
+function run(i,qs){let n=0,sc=0;const nx=()=>{if(n>=qs.length)return fin(i,sc,qs.length);const q=qs[n];let m=0;
+A.innerHTML=`<h2>${M[i][0]} ${n+1} / ${qs.length}</h2><div class=big>${q.p}</div>${q.s?'<button class=snd>🔊 Listen</button>':''}<div class="opts ${q.c||''}">${q.o.map(o=>`<button class=opt>${o.h}</button>`).join('')}</div>`;
+if(q.s){setTimeout(()=>say(q.s),300);$('.snd').onclick=()=>say(q.s)}
+on('.opt',(e,j)=>{const o=q.o[j];if(o.ok){if(!m){sc++;add(1)}e.classList.add('ok');say(o.v);setTimeout(()=>{n++;nx()},1300)}else{m=1;e.classList.add('ng')}})};nx()}
+function learn(i){let g=0,tp=0;const tap=()=>{if(++tp==6)D.add(i)};const v=()=>{A.innerHTML=`<h2>📖 Learn</h2><p>タップしてきこう！</p><div class=tabs>${[...G,'💬 Phrases'].map((x,j)=>`<button class="tab ${j==g?'on':''}">${x}</button>`).join('')}</div>`+(g<3?`<div class=grid4>${W.slice(g*8,g*8+8).map(x=>`<button class=wc><span>${x[1]}</span><b>${x[0]}</b><small>${x[2]}</small><small>${x[3]}</small></button>`).join('')}</div>`:`<p>🇯🇵 日本語を見て、英語を言ってみよう！ タップでこたえ</p><div class=ph>${PH.map(x=>`<button class=pc><b>${x[1]}</b><small>👆 えいごは？</small></button>`).join('')}</div>`)+`<button class=btn id=h>✅ OK!</button>`;
+on('.tab',(e,j)=>{g=j;v()});on('.wc',(e,j)=>{const x=W[g*8+j];say(x[0]+'. '+x[3]);tap()});on('.pc',(e,j)=>{if(!e.dataset.o){e.dataset.o=1;e.classList.add('up');e.innerHTML=`<b>🔊 ${PH[j][0]}</b><small>${PH[j][1]}</small>`;tap()}say(PH[j][0])});$('#h').onclick=home};v()}
+function match(i){const w=sh(W).slice(0,8),c=sh(w.flatMap((x,k)=>[{k,h:x[0]},{k,h:x[2]}]));let f=null,lock=0,m=0;
+A.innerHTML=`<h2>🃏 Memory Match</h2><p>えいごとにほんごをむすぼう！</p><div class=grid4 style="max-width:760px">${c.map(()=>'<button class="cd bw">❓</button>').join('')}</div>`;const E=$$('.cd');
+E.forEach((e,j)=>e.onclick=()=>{if(lock||e.dataset.o)return;e.textContent=c[j].h;e.dataset.o=1;e.classList.add('up');say(w[c[j].k][0]);if(f===null){f=j;return}
+if(c[f].k===c[j].k){add(1);m++;E[f].classList.add('ok');e.classList.add('ok');f=null;if(m==8)setTimeout(()=>fin(i,8,8),900)}
+else{lock=1;const p=f;f=null;setTimeout(()=>{[p,j].forEach(x=>{E[x].textContent='❓';delete E[x].dataset.o;E[x].classList.remove('up')});lock=0},1000)}})}
+function bingo(i){const w=sh(W).slice(0,16),q=sh(W),L=[[0,5,10,15],[3,6,9,12]];for(let r=0;r<4;r++){L.push([0,1,2,3].map(c=>r*4+c),[0,1,2,3].map(c=>c*4+r))}let d=0,cur=null,seen=new Set,mk=[],ln=0;
+A.innerHTML=`<h2>🎱 Halloween Bingo!</h2><p>きいて、カードのことばをタップ！</p><div class=big id=bm style="font-size:56px">🔊</div><button class=btn id=dr>🎲 Draw!</button><button class=btn id=rp style="background:var(--pu);color:#fff">🔊 Again</button><button class=btn id=nw>🔄 New Card</button><div class=grid4 style="max-width:680px">${w.map(x=>`<button class="cd bw">${x[0]}</button>`).join('')}</div><p id=bc></p>`;const E=$$('.bw');
+const up=()=>$('#bc').textContent=`Bingo: ${ln} / 10 · Draw ${d} / 24`;up();
+$('#dr').onclick=()=>{if(d>=24||mk.filter(Boolean).length==16)return fin(i,ln,10);cur=q[d++];seen.add(cur);say(cur[0]);$('#bm').textContent='🔊 ?';up()};
+$('#rp').onclick=()=>cur&&say(cur[0]);$('#nw').onclick=()=>bingo(i);
+E.forEach((e,j)=>e.onclick=()=>{if(mk[j])return;if(seen.has(w[j])){mk[j]=1;e.classList.add('ok');e.textContent='✅ '+e.textContent;add(1);$('#bm').textContent=w[j][1]+' '+w[j][0];
+const n=L.filter(l=>l.every(k=>mk[k])).length;if(n>ln){ln=n;$('#bm').textContent='🎉 BINGO!';say('Bingo!')}up()}else{e.classList.add('ng');setTimeout(()=>e.classList.remove('ng'),500)}})}
+function quiz(i){const w=sh(W),q=[],op=(t,n)=>sh([t,...sh(w.filter(x=>x!==t)).slice(0,n)]);for(let k=0;k<8;k++){const t=w[k];
+if(k<3)q.push({p:'Which one?',s:t[0],c:'e',o:op(t,3).map(x=>({h:x[1],ok:x===t,v:t[0]}))});
+else if(k<6)q.push({p:'Who am I?',s:t[3],c:'e',o:op(t,3).map(x=>({h:x[1],ok:x===t,v:t[0]}))});
+else q.push({p:t[1],o:op(t,2).map(x=>({h:x[0],ok:x===t,v:t[0]}))})}
+sh(PH).slice(0,2).forEach(t=>{const ot=sh(PH.filter(x=>x!==t)).slice(0,2);q.push({p:'イミは？',s:t[0],o:sh([t,...ot]).map(x=>({h:x[1],ok:x===t,v:t[0]}))})});run(i,q)}
+function whack(i){const qs=sh(W).slice(0,10);let n=0,sc=0;const nx=()=>{if(n>=10)return fin(i,sc,10);const t=qs[n],ho=sh([t,...sh(W.filter(x=>x!==t)).slice(0,8)]),cl=n%2==1,sy=cl?t[3]:t[0];let m=0,t0=Date.now();
+A.innerHTML=`<h2>🔨 Whack-a-Word ${n+1} / 10</h2><p>${cl?'Who am I? ヒントをきこう！':'Listen and tap! きいてタップ！'}</p><button class=snd>🔊 Listen</button><div class=grid3>${ho.map((x,j)=>`<button class="cd hole" style="animation-delay:${j*70}ms">${x[1]}</button>`).join('')}</div>`;
+setTimeout(()=>say(sy),300);$('.snd').onclick=()=>say(sy);
+on('.hole',(e,j)=>{if(e.dataset.o)return;if(ho[j]===t){e.textContent='💥';e.dataset.o=1;if(!m){sc++;add(Date.now()-t0<6000?2:1)}say(t[0]+'!');setTimeout(()=>{n++;nx()},900)}else{m=1;e.classList.add('ng')}})};nx()}
+function rain(i){let sc=0,T,tm=45;const nt=()=>{T=W[Math.random()*24|0];say(T[0])};
+A.innerHTML=`<h2>🍬 Candy Rain</h2><button class=snd id=tg>🔊 Listen!</button><div id=bx></div><p id=tt>⏱ 45</p>`;nt();$('#tg').onclick=()=>say(T[0]);
+const sp=setInterval(()=>{if(!$('#bx'))return clearInterval(sp);const x=Math.random()<.35?T:W[Math.random()*24|0],e=document.createElement('button');e.className='fl';e.textContent=x[1];e.style.left=Math.random()*80+'%';
+e.onclick=()=>{if(x===T){sc++;add(1);e.textContent='💥';setTimeout(()=>e.remove(),300);nt()}else e.classList.add('ng')};$('#bx').append(e);setTimeout(()=>e.remove(),3700)},480);
+const ti=setInterval(()=>{if(!$('#bx'))return clearInterval(ti);tm--;$('#tt').textContent='⏱ '+tm;if(tm<=0){clearInterval(sp);clearInterval(ti);fin(i,sc,0)}},1000)}
+function spell(i){const qs=sh(W).slice(0,8);let n=0;const nx=()=>{if(n>=8)return fin(i,8,8);const t=qs[n],wd=t[0];let cur='';
+A.innerHTML=`<h2>✨ Spell It ${n+1} / 8</h2><div class=big>${t[1]}</div><div class=slots id=sl></div><div class=opts style="grid-template-columns:repeat(auto-fit,minmax(70px,1fr))">${sh(wd).map(c=>`<button class=opt>${c}</button>`).join('')}</div><button class=snd>🔊 Listen</button>`;
+const up=()=>$('#sl').textContent=cur.padEnd(wd.length,'_').split('').join(' ');up();$('.snd').onclick=()=>say(wd);setTimeout(()=>say(wd),300);
+on('.opt',e=>{if(e.dataset.o)return;e.dataset.o=1;e.style.opacity=.3;cur+=e.textContent;up();if(cur.length==wd.length){if(cur==wd){add(1);$('#sl').classList.add('ok');say(wd+'!');setTimeout(()=>{n++;nx()},1200)}else{$('#sl').classList.add('ng');setTimeout(nx,700)}}})};nx()}
+const SP=[["🔍 see / look / find / found / search",["see","look","find","found","search"],["I see a big pumpkin!","Look at the bat!","Let us find the ghost house.","We search for candy.","I found a spider web.","Can you find the black cat?"]],
+["👻 ghost / witch / vampire / zombie",["ghost","witch","vampire","zombie"],["I see a ghost in the old house.","The witch has a black cat.","A vampire is at the door!","Look! A zombie is dancing.","We eat cake at the party."]],
+["🍬 candy / cake / cookie / apple",["candy","cake","cookie","apple"],["Do you want some candy?","I eat a cookie and an apple.","The cake is big and sweet.","A bat flies in the moon light."]]];
+const WH=[["ghost","I am white.","I can fly, but I have no legs.","I say Boo!"],["bat","I have wings.","I sleep all day.","I fly at night."],["witch","I wear a black hat.","I have a black cat.","I fly on a broom."],["spider","I have eight legs.","I live in a web.","I am small and black."],["pumpkin","I am round.","I am orange.","People make my face at Halloween."],["skeleton","I have no skin.","I have many bones.","I am white and I dance."],["dragon","I am very big.","I have wings and a long tail.","I breathe fire."],["cat","I have four legs.","I say meow.","I am black and I live with a witch."]];
+function spot(i){let r=0;const nx=()=>{if(r>=SP.length)return fin(i,SP.length,SP.length);const[ti,tg,ss]=SP[r];let left=0;
+A.innerHTML=`<h2>🕵️ Spot the Words! ${r+1} / ${SP.length}</h2><p>👇 ${ti} をタップしよう！</p><div class=chat>${ss.map(x=>`<div class=sn>${x.split(' ').map(t=>{const h=tg.includes(t.replace(/[^A-Za-z]/g,'').toLowerCase());if(h)left++;return`<button class=tk data-h=${h?1:0}>${t}</button>`}).join(' ')}</div>`).join('')}</div><p id=sm></p>`;
+on('.tk',e=>{if(e.dataset.d)return;const c=e.textContent.replace(/[^A-Za-z]/g,'');if(e.dataset.h==1){e.dataset.d=1;e.classList.add('ok');say(c);add(1);if(--left==0){$('#sm').textContent='🎉 All found! Amazing!';setTimeout(()=>{r++;nx()},1600)}}else{e.classList.add('ng');setTimeout(()=>e.classList.remove('ng'),500)}})};nx()}
+function who(i){const qs=sh(WH).slice(0,4);let n=0;const nx=()=>{if(n>=4)return fin(i,4,4);const q=qs[n],t=W.find(x=>x[0]==q[0]);let c=1;
+const rd=()=>{A.innerHTML=`<h2>🤔 Who Am I? ${n+1} / 4</h2><p>ヒントをきいて、なんのことかあてよう！</p><div class=chat>${q.slice(1,c+1).map(x=>`<div class=bb>🔍 ${x}</div>`).join('')}</div><button class=btn id=nc ${c>=3?'disabled style="opacity:.4"':''}>Next Clue 💡</button><button class=btn id=sa>Show Answer ✅</button>`;say(q[c]);
+$('#nc').onclick=()=>{if(c<3){c++;rd()}};$('#sa').onclick=()=>{add(4-c);A.innerHTML=`<h2>🤔 ${n+1} / 4</h2><div class=big>${t[1]}</div><h2>${t[0]}</h2><p>${t[2]}</p><button class=btn id=nx>Next ▶</button>`;say('It is a '+t[0]+'!');$('#nx').onclick=()=>{n++;nx()}}};rd()};nx()}
+const bub=(l,me)=>`<div class="bb ${l[0]}${me?' me':''}">${l[0]=='H'?'🧑':'🧒'} ${l[1]}<small>${l[2]}</small></div>`,sc2=()=>setTimeout(()=>scrollTo(0,document.body.scrollHeight),50);
+function rpmenu(i){A.innerHTML=`<h2>💬 Role Play</h2><p>えいかいわをれんしゅう！ 3つのばめん</p><div class=grid>${RP.map((r,k)=>`<button class="tile ${RD.has(k)?'d':''}"><span>${r[0]}</span><b>${r[1]}</b><small>${r[2]}</small></button>`).join('')}</div>`;on('.tile',(e,k)=>rpplay(i,k))}
+function rpplay(i,k){const L=RP[k][3];let n=0,log='';const shw=x=>{A.innerHTML=`<h2>${RP[k][0]} ${RP[k][1]}</h2><p>${n+1} / ${L.length}</p><div class=chat>${log}</div>${x}`;sc2()};
+const nx=()=>{if(n>=L.length){RD.add(k);if(RD.size==RP.length)D.add(i);add(3);return rpread(i,k,'Y')}const l=L[n];let m=0;
+if(l[0]=='H'){log+=bub(l);shw('<button class=btn id=nx>Next ▶</button><button class=snd id=pl>🔊</button>');say(l[1]);$('#nx').onclick=()=>{n++;nx()};$('#pl').onclick=()=>say(l[1])}
+else{const pv=n?L[n-1][1]:'';shw(`<p>🧒 あなたのばん！ なんてこたえる？</p>${pv?'<button class=snd id=pl>🔊 Listen again</button>':''}<div class=opts>${sh([l[1],l[3],l[4]]).map(x=>`<button class=opt>${x}</button>`).join('')}</div>`);if(pv)$('#pl').onclick=()=>say(pv);
+on('.opt',e=>{if(e.textContent==l[1]){if(!m)add(1);e.classList.add('ok');say(l[1]);log+=bub(l);setTimeout(()=>{n++;nx()},1400)}else{m=1;e.classList.add('ng')}})}};nx()}
+function rpread(i,k,role){const L=RP[k][3];let n=0,log='';const nx=()=>{if(n>=L.length){A.innerHTML=`<div class=big>🎉</div><h2>Great Job!</h2><p>いっしょにれんしゅう かんりょう！</p><button class=btn id=sw>🔄 Swap roles</button><button class=btn id=mn>📋 Menu</button>`;say('Great job!');$('#sw').onclick=()=>rpread(i,k,role=='Y'?'H':'Y');$('#mn').onclick=()=>rpmenu(i);return}
+const l=L[n],me=l[0]==role;log+=bub(l,me);
+A.innerHTML=`<h2>${RP[k][1]}</h2><p>${role=='Y'?'🧒 You are Role A':'🧑 You are Role B'} · ${n+1} / ${L.length} · せんせいとれんしゅう！</p><div class=chat>${log}</div>${me?'<p style="font-size:26px">🎤 Your turn! いってみよう！</p><button class=snd id=pl>🔊 Model</button> ':''}<button class=btn id=nx>Next ▶</button>`;sc2();
+if(!me)say(l[1]);$('#nx').onclick=()=>{n++;nx()};if(me)$('#pl').onclick=()=>say(l[1])};nx()}
+home();
+</script></body></html>
